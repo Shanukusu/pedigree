@@ -1,56 +1,59 @@
 <template>
   <div class="label-container">
-    <slot></slot>
+    <slot />
     <span 
-      v-if="value !== ''" 
-      :class="{ 'label': true, 'label-with-text': !!value }"
+      v-if="value" 
+      class="label"
+      :class="{'label--with-text': !!value }"
     >
       {{ value }}
     </span>
     <span 
       v-else 
-      class="label label-empty"
-    >
-    </span>
+      class="label label--without-text"
+    />
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'LabelComponent',
-    props: {
-      value: {
-        type: String,
-        default: ''
-      }
+export default {
+  name: 'LabelComponent',
+  props: {
+    value: {
+      type: String,
+      default: ''
     }
   }
+}
 </script>
 
 <style scoped lang="less">
-.label-container {
-  display: inline-block;
-  position: relative;
-  width: 100%;
-}
 .label {
   background-color: #ff7575;
   width: auto;
   height: auto;
-  border-radius: 2em;
+  border-radius: 30%;
+  position: absolute;
+
+  &--with-text{
+    right: -10px;
+    top: -10px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  &--without-text{
+    right: -5px;
+    top: -5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+  }
+}
+
+.label-container {
   position: relative;
-  right: 8px;
-  bottom: 15px;
-  display: inline-block;
-}
-.label-with-text {
-  padding: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-.label-empty {
-  width: 12px;
-  height: 12px;
-  border-radius: 6px;
+  width: fit-content;
 }
 </style>
